@@ -22,11 +22,14 @@ echo "<div class='container border-bottom'>";
 		echo "<p class='font-weight-bold'><i class='fas fa-quote-right'></i>   ".$row['post_content']."</p> ";
 		echo "<p class = 'font-italic'>Published on ". $row['post_date']."</p>";
 	$q1 = "SELECT * FROM posts p 
-		JOIN users u ON u.user_id=p.user_id ";
+		JOIN users_info ui ON ui.user_id=p.user_id ";
 	$res1 = mysqli_query($conn, $q1);
 	while ($row1 = mysqli_fetch_assoc($res1)){
 		if ($row1['post_id'] == $post_id) {
-			echo "<p class = 'font-italic' > By author: ".$row1['username']."</p> ";
+			$pic = $row1['picture'];
+			echo "<p class = 'font-italic' > By author: </p>";
+			echo "<p><img src='$pic' height='250' width='200'> </p>" ;
+			echo "<p class = 'font-italic' >" . $row1['name']." ". $row1['surname']."</p> ";
 		}
 	}
 		echo "<p>";
