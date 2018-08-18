@@ -1,3 +1,44 @@
+html, body, div, p, h1, h2, h3, img, a,
+ul, li {
+	margin: 0px;
+	padding: 0px;
+}
+
+
+body {
+	width: 100%;
+	font-size: 62.5%;
+}
+
+ul {
+	list-style-type: none
+
+}
+
+a, li{
+	text-decoration: none;
+	color: #fff;
+	display: inline-block;
+}
+
+#login {
+	width: 170px;
+	margin-left: 100px;
+}
+
+.container {
+	
+	margin-left: 50px;
+}
+
+.col-6{
+	margin-top: 100px;
+}
+p#post_content {
+	font-weight: bold;
+	
+}
+
 footer {
 	border-top: 2px solid #ccc;
 	padding-top: 50px;

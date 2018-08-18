@@ -10,15 +10,6 @@ $result = mysqli_query($conn, $q2);
 
 $comments = [];
 
-
-
-// $comments_count = count($comments);
-// $comment_id = $comments_count +1;
-
-//var_dump($comment_id);
-
-
-
 //END COMMENT COUNT
 
 //2. GET POST ID
@@ -48,7 +39,7 @@ if(empty($_POST['submit'])){
 
 	echo "<textarea name= 'comment_content' > </textarea>";
 	
-	echo "<input type='submit' name='submit' value='update'>";
+	echo "<p><button class='btn btn-primary' type='submit' name='submit' value='update'>Comment</button></p>";
 	echo "</form>";
 }else {
 

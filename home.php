@@ -24,14 +24,13 @@ $row2 = mysqli_fetch_assoc($result2);
 //THIS IS WORKING
 if (mysqli_num_rows($result)>0) {
 	while($row = mysqli_fetch_assoc($result)){
-		echo "<div>";
-
-		echo "<p>".$row['post_id']." </p>";
-
-		echo "<p>".$row['post_content']."</p> ";
-		echo "<p>".$row2['username']."</p> ";
-		echo "<p>". $row['post_date']."</p>";
-		echo "<p><a href='#'>Like</a> <a href='view_post.php?post_id=" . $row['post_id'] . "'>View post</a></p>";
+		echo "<div class='container'>";
+			echo "<div class='border-bottom col-6'>";
+				echo "<p class='font-weight-bold'>".$row['post_content']."</p> ";
+				echo "<p class = 'text-right font-italic'> By author: ".$row2['username']."</p> ";
+				echo "<p class = 'text-right font-italic'>". $row['post_date']."</p>";
+				echo "<p> <a href='view_post.php?post_id=" . $row['post_id'] . "'>View post</a></p>";
+			echo "</div>";
 		echo "</div>";
 	}
 }

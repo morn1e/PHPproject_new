@@ -8,7 +8,7 @@ if (empty($_POST['submit'])) {
 	echo "Compose a new post: ";
 	echo "<form action='add_post.php' method='post' >";
 	echo "<textarea name= 'post_content' > </textarea>";
-	echo "<input type= 'submit'  name= 'submit' value = 'post' >";
+	echo "<p><button class='btn btn-primary' type= 'submit'  name= 'submit' value = 'post' >Add post</button></p>";
 	echo "</form>";
 }else {
 	$post = $_POST['post_content'];
@@ -20,7 +20,7 @@ if (empty($_POST['submit'])) {
 		$insert_result = mysqli_query($conn, $insert_query);
 		if ($insert_result) {
 			echo "Thank you, ". $username. " You just created one new post!";
-			echo "<p> <a href= 'home.php'> Back </a></p> ";
+			echo "<p><i class='fas fa-arrow-left text-primary'></i><a href='home.php'>  Back</a></p>";
 		}else {
 			echo "Could not create a post! Please try again later!";
 		}
