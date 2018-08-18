@@ -1,6 +1,7 @@
 <?php 
 include('includes/header.php');
 include('includes/db.php');
+
 ?>
 	<form method="post" action="includes/login.php">
 		<label>Please, log in!</label>

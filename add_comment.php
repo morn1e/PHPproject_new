@@ -10,14 +10,10 @@ $result = mysqli_query($conn, $q2);
 
 $comments = [];
 
-if (mysqli_num_rows($result)>0) {
-	while ($row2 = mysqli_fetch_assoc($result)) {
-		$comments[]= $row2['comment_id'];
-	}
-}
 
-$comments_count = count($comments);
-$comment_id = $comments_count +1;
+
+// $comments_count = count($comments);
+// $comment_id = $comments_count +1;
 
 //var_dump($comment_id);
 
@@ -32,14 +28,15 @@ if(empty($_POST['submit'])){
 	$post_id = $_GET['post_id'];
 
 //to populate the form
-	$q = "SELECT * FROM posts WHERE post_id = $post_id";
+	$q = "SELECT * FROM posts WHERE post_id = '$post_id'";
 	$res = mysqli_query($conn, $q);
 
 //we expect as a result only one row
 //so we do not need the while cycle
 	$row = mysqli_fetch_assoc($res);
 
-var_dump($row);
+// //var_dump($row);
+// echo $row['post_id'];
 
 //form is exactly the same as in create.php
 //MIND THE VALUES!!! AND HIDDEN INPUT TYPE
@@ -59,19 +56,35 @@ var_dump($row);
 //var_dump($_POST);
 	
 	$comment = $_POST['comment_content'];
-	$post_id = $_POST['post_id'];
-	//var_dump($post_id);
+	$post_Nid = $_POST['post_id'];
+	$user_id = $_SESSION['user_id'];
+	$username = $_SESSION['username'];
+	$date = date('Y-m-d');
+	//var_dump($post_Nid);
 
-	$insert_query = "INSERT INTO comments (comment_content) VALUES ('$comment')";
+	$insert_query = "INSERT INTO comments (comment_content, user_id, comment_date) VALUES ('$comment', '$user_id', '$date')";
+		//get comment ID
+	$comment_id_query = "SELECT * FROM comments ";
+	$comment_id_result = mysqli_query($conn, $comment_id_query);
+	//$row_comment = mysqli_fetch_assoc($comment_id_result);
+	if (mysqli_num_rows($comment_id_result)>0) {
+	while ($row_comment = mysqli_fetch_assoc($comment_id_result)) {
+		$arr = [];
+		$arr[] = $row_comment['comment_id'];
+		
+	}
+}
+
+$comment_id = $arr[0]+=1;
 		// or result
 		$insert_result = mysqli_query($conn, $insert_query);
-	$insert_query2 = "INSERT INTO posts_comments (post_id, comment_id) VALUES ('$post_id', '$comment_id')";
+	$insert_query2 = "INSERT INTO posts_comments (post_id, comment_id) VALUES ('$post_Nid', '$comment_id')";
 		// or result
 		$insert_result2 = mysqli_query($conn, $insert_query2);
 
 	if ($insert_result && $insert_query2) {
-		echo "You successfully commentet this post!";
-		echo "<p><a href='#'>Like</a> <a href='view_post.php?post_id=" . $post_id . "'>Back</a></p>";
+		echo "Thank you ". $username. " You successfully commented this post!";
+		echo "<p> <a href='view_post.php?post_id=" . $post_Nid . "'>Back</a></p>";
 	}else {
 		echo "Could not create a comment! Please try again later!";
 	}

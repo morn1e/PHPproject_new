@@ -12,13 +12,15 @@ if (empty($_POST['submit'])) {
 	echo "</form>";
 }else {
 	$post = $_POST['post_content'];
+	$user_id = $_SESSION['user_id'];
+	$username = $_SESSION['username'];
 
-	$insert_query = "INSERT INTO posts (post_content, post_date) VALUES ('$post', '$date')";
+	$insert_query = "INSERT INTO posts (post_content, post_date, user_id) VALUES ('$post', '$date', '$user_id')";
 		// or result
 		$insert_result = mysqli_query($conn, $insert_query);
 		if ($insert_result) {
-			echo "One new post was created successfully!";
-			echo "<p> <a href= 'index.php'> Back </a></p> ";
+			echo "Thank you, ". $username. " You just created one new post!";
+			echo "<p> <a href= 'home.php'> Back </a></p> ";
 		}else {
 			echo "Could not create a post! Please try again later!";
 		}

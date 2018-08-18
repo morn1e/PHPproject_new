@@ -11,7 +11,7 @@ $q = "SELECT * FROM posts WHERE post_id = $post_id";
 //so we do not need the while cycle
 	$row = mysqli_fetch_assoc($res);
 
-	$post_id = $row['post_id'];
+	//$post_id = $row['post_id'];
 
 
 // add post content
@@ -37,27 +37,32 @@ echo "</div>";
 	
 
 
-//ADD comments		
+//ADD comments
+
+
 $q2 = "SELECT  *
 		FROM comments c	
+		JOIN users u ON u.user_id= c.user_id
 		JOIN posts_comments pc ON pc.comment_id = c.comment_id
-        JOIN users u ON u.user_id= c.user_id
+        ORDER BY c.comment_id ASC
        ";
 
 $result2 = mysqli_query($conn, $q2);
 
-if (mysqli_num_rows($result2)>0) {
-	while ( $row2 = mysqli_fetch_assoc($result2)) {
+
+
+ if (mysqli_num_rows($result2)>0) {
+	while ($row2 = mysqli_fetch_assoc($result2)) {
+		// var_dump($row2);
+		// echo $post_id;
 		if ($row2['post_id'] == $post_id ) {
 		echo "<p>".$row2['comment_content']." </p>";
 		echo "<p>".$row2['comment_date']."</p> ";
 		echo "<p>".$row2['username']."</p> ";
 		}
 	}
-		
-
 }
-
+echo "<p><a href='home.php'>Back</a></p>";
 
 
 include('includes/footer.php')
